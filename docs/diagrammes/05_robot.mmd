@@ -1,0 +1,11 @@
+flowchart TD
+  A(["gererRobot(sim)"]) --> B["(l, c) ← position du robot"]
+  B --> C{"grille[l][c] = DECHET<br/>et connu[l][c] = 1 ?"}
+  C -- Oui --> D{"robot.charge<br/>< CAPACITE_ROBOT ?"}
+  D -- Non --> M["message : robot plein,<br/>aller au centre"] --> E
+  D -- Oui --> K["Ramassage :<br/>grille[l][c] ← LIBRE, connu[l][c] ← 0<br/>robot.charge ← robot.charge + 1<br/>nbPresents ← nbPresents - 1"]
+  K --> FIN
+  C -- Non --> E{"grille[l][c] = CENTRE<br/>et robot.charge > 0 ?"}
+  E -- Non --> FIN(["Fin"])
+  E -- Oui --> F["Dépôt :<br/>nbCollectes ← nbCollectes + robot.charge<br/>robot.charge ← 0"]
+  F --> FIN

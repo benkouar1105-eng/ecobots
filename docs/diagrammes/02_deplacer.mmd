@@ -1,0 +1,8 @@
+flowchart TD
+  A(["deplacer(sim, pos, dl, dc)"]) --> B["nl ← pos.ligne + dl<br/>nc ← pos.colonne + dc"]
+  B --> C{"0 ≤ nl < HAUTEUR<br/>et 0 ≤ nc < LARGEUR ?"}
+  C -- Non --> R0(["retourner 0<br/>(déplacement refusé)"])
+  C -- Oui --> D{"grille[nl][nc]<br/>= OBSTACLE ?"}
+  D -- Oui --> R0
+  D -- Non --> E["pos.ligne ← nl<br/>pos.colonne ← nc"]
+  E --> R1(["retourner 1<br/>(déplacement effectué)"])

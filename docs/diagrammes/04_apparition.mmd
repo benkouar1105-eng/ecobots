@@ -1,0 +1,11 @@
+flowchart TD
+  A(["faireApparaitreDechet(sim)"]) --> B{"rand() % 100<br/>< PROBA_APPARITION ?"}
+  B -- Non --> FIN(["Fin : pas de nouveau déchet ce tour"])
+  B -- Oui --> C["essai ← 0"]
+  C --> D{"essai < NB_ESSAIS_MAX ?"}
+  D -- Non --> FIN
+  D -- Oui --> E["l ← rand() % HAUTEUR<br/>c ← rand() % LARGEUR"]
+  E --> F{"grille[l][c] = LIBRE<br/>et (l, c) ≠ position du robot ?"}
+  F -- Non --> G["essai ← essai + 1"] --> D
+  F -- Oui --> H["grille[l][c] ← DECHET<br/>connu[l][c] ← 0<br/>nbPresents ← nbPresents + 1"]
+  H --> FIN2(["Fin : un déchet est apparu"])

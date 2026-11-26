@@ -1,0 +1,20 @@
+flowchart TD
+  A([Début]) --> B["Initialiser le hasard : srand(time(NULL))"]
+  B --> C[["initialiserSimulation :<br/>charger la carte, placer drone et robot<br/>sur le centre de collecte, compteurs à 0"]]
+  C --> E[["afficherReserve + afficherInfos"]]
+  E --> F{"Simulation<br/>en cours ?"}
+  F -- Non --> Z[["afficherBilan"]] --> Y([Fin])
+  F -- Oui --> G{"Touche appuyée ?<br/>kbhit()"}
+  G -- Non --> M
+  G -- Oui --> H[/"Lire la touche : getch()"/]
+  H --> I{"Quelle touche ?"}
+  I -- "Z, Q, S, D" --> J[["deplacer le drone"]] --> M
+  I -- "I, J, K, L" --> K[["deplacer le robot"]] --> K2[["gererRobot :<br/>ramasser ou déposer"]] --> M
+  I -- "X" --> L["arreterSimulation<br/>(enCours ← 0)"] --> M
+  I -- "autre" --> M
+  M[["faireApparaitreDechet<br/>(aléatoire)"]] --> D[["detecterDechets<br/>autour du drone"]]
+  D --> N["nbTours ← nbTours + 1"]
+  N --> O[["verifierFin :<br/>objectif atteint ou nbTours ≥ TOURS_MAX"]]
+  O --> P[["afficherReserve + afficherInfos"]]
+  P --> Q["attendre DELAI ms"]
+  Q --> F

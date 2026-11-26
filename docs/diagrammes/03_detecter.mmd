@@ -1,0 +1,15 @@
+flowchart TD
+  A(["detecterDechets(sim)"]) --> B["i ← -1"]
+  B --> C{"i ≤ 1 ?"}
+  C -- Non --> FIN(["Fin"])
+  C -- Oui --> D["j ← -1"]
+  D --> E{"j ≤ 1 ?"}
+  E -- Non --> I2["i ← i + 1"] --> C
+  E -- Oui --> F["l ← drone.ligne + i<br/>c ← drone.colonne + j"]
+  F --> G{"(l, c) dans la grille ?"}
+  G -- Non --> J2
+  G -- Oui --> H{"grille[l][c] = DECHET<br/>et connu[l][c] = 0 ?"}
+  H -- Non --> J2
+  H -- Oui --> K["connu[l][c] ← 1<br/>nbDetectes ← nbDetectes + 1"]
+  K --> J2["j ← j + 1"]
+  J2 --> E

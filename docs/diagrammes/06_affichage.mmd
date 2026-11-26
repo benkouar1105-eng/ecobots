@@ -1,0 +1,17 @@
+flowchart TD
+  A(["afficherReserve(sim)"]) --> B["l ← 0"]
+  B --> C{"l < HAUTEUR ?"}
+  C -- Non --> FIN(["Fin"])
+  C -- Oui --> D["c ← 0"]
+  D --> E{"c < LARGEUR ?"}
+  E -- Non --> L2["passer à la ligne<br/>l ← l + 1"] --> C
+  E -- Oui --> F{"(l, c) = drone ?"}
+  F -- Oui --> FD[/"afficher 'D' (cyan)"/] --> N
+  F -- Non --> G{"(l, c) = robot ?"}
+  G -- Oui --> GR[/"afficher 'R' (jaune)"/] --> N
+  G -- Non --> H{"type de grille[l][c] ?"}
+  H -- OBSTACLE --> HO[/"afficher '#' (vert foncé)"/] --> N
+  H -- CENTRE --> HC[/"afficher 'C' (rouge)"/] --> N
+  H -- "DECHET et connu = 1" --> HD[/"afficher '*' (blanc)"/] --> N
+  H -- "LIBRE ou déchet non détecté" --> HL[/"afficher '.'"/] --> N
+  N["c ← c + 1"] --> E

@@ -1,0 +1,9 @@
+flowchart LR
+  M["main.c<br/>boucle principale<br/>lecture clavier (conio)"]
+  S["simulation.c / .h<br/>données + règles<br/>(aucun printf)"]
+  A["affichage.c / .h<br/>tous les affichages"]
+  AC["affichage_console.h<br/>(fourni en cours)"]
+  M -- "appelle" --> S
+  M -- "appelle" --> A
+  A -- "lit l'état (const)" --> S
+  A --> AC
